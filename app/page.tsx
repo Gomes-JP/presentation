@@ -3267,16 +3267,25 @@ const metricsConfig = {
   rg: { name: 'Raio de Giro (Rg)', unit: 'Å', dataKey: 'rg', xAxis: 'Frame (Index)', yAxisLabel: 'Raio de Giro (Å)' },
 };
 
+// Definição de Tipagem para as Props do Gráfico
+type MetricsChartProps = {
+  initialMetric: keyof typeof metricsConfig;
+  data: {
+    timeSeries: { [key: string]: number }[];
+    residueSeries: { [key: string]: number }[];
+  };
+};
+
+
 // --- Componente do Gráfico Interativo ---
 const MetricsChart = ({ initialMetric, data }: MetricsChartProps) => {
   const [selectedMetric, setSelectedMetric] = useState(initialMetric);
   const config = metricsConfig[selectedMetric];
 
- // Determina qual série de dados usar (tempo/frame ou resíduo)
+  // Determina qual série de dados usar (tempo/frame ou resíduo)
   const chartData = useMemo(() => {
     return config.dataKey === 'rmsf' ? data.residueSeries : data.timeSeries;
   }, [config.dataKey, data.residueSeries, data.timeSeries]);
-
 
   // Chave X: 'residue' para RMSF, 'frame' para RMSD e Rg
   const xAxisKey = config.dataKey === 'rmsf' ? 'residue' : 'frame';
