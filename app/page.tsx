@@ -3276,7 +3276,6 @@ type MetricsChartProps = {
   };
 };
 
-
 // --- Componente do Gráfico Interativo ---
 const MetricsChart = ({ initialMetric, data }: MetricsChartProps) => {
   const [selectedMetric, setSelectedMetric] = useState(initialMetric);
@@ -3291,8 +3290,8 @@ const MetricsChart = ({ initialMetric, data }: MetricsChartProps) => {
   const xAxisKey = config.dataKey === 'rmsf' ? 'residue' : 'frame';
 
   // Cores personalizadas para os sistemas
-  const colorA = "#2563EB"; // Azul Forte (Blue-600)
-  const colorB = "#EF4444"; // Vermelho Forte (Red-500)
+  const colorA = "#023094ff"; // Azul Forte (Blue-600)
+  const colorB = "#730505ff"; // Vermelho Forte (Red-500)
 
   const metricButtons = Object.keys(metricsConfig).map(key => {
     const metric = metricsConfig[key];
