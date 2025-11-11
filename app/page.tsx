@@ -3268,14 +3268,15 @@ const metricsConfig = {
 };
 
 // --- Componente do Gráfico Interativo ---
-const MetricsChart = ({ initialMetric, data }) => {
+const MetricsChart = ({ initialMetric, data }: MetricsChartProps) => {
   const [selectedMetric, setSelectedMetric] = useState(initialMetric);
   const config = metricsConfig[selectedMetric];
 
-  // Determina qual série de dados usar (tempo/frame ou resíduo)
+ // Determina qual série de dados usar (tempo/frame ou resíduo)
   const chartData = useMemo(() => {
     return config.dataKey === 'rmsf' ? data.residueSeries : data.timeSeries;
   }, [config.dataKey, data.residueSeries, data.timeSeries]);
+
 
   // Chave X: 'residue' para RMSF, 'frame' para RMSD e Rg
   const xAxisKey = config.dataKey === 'rmsf' ? 'residue' : 'frame';
